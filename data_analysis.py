@@ -9,28 +9,29 @@ YEAR = 2017
 
 # Functions
 # returns datetime.datetime
-def parscsv(str_time):
+def parsTime(str_time):
     str_new_time = str(YEAR) + ' ' + str_time
     return datetime.strptime(str_new_time, '%Y %d %m %H %M')
 
 def cmpTimeE(str_time, datetime):
-    return parscsv(str_time) == datetime
+    return parsTime(str_time) == datetime
 
 def cmpTimeGE(str_time, datetime):
-    return parscsv(str_time) >= datetime
+    return parsTime(str_time) >= datetime
 
 def cmpTimeLE(str_time, datetime):
-    return parscsv(str_time) <= datetime
+    return parsTime(str_time) <= datetime
 
 def cmpTimeG(str_time, datetime):
-    return parscsv(str_time) > datetime
+    return parsTime(str_time) > datetime
 
 def cmpTimeL(str_time, datetime):
-    return parscsv(str_time) < datetime
+    return parsTime(str_time) < datetime
 
 # returns "Filter" - pandas.core.series.Series (True/False)
 # timeForCmp - datetime.datetime - time for comparison
-def filterTimeCsv(cmpFun, dataFrame, timeForCmp):
+# Createf filter for dataFrame, based on
+def filterTime(cmpFun, dataFrame, timeForCmp):
     dataLen = len(dataFrame)
     data = [0 for x in range(dataLen)] # TODO: rename var
     for i in range(len(dataFrame)):
@@ -49,9 +50,8 @@ def filterTimeCsv(cmpFun, dataFrame, timeForCmp):
 stats = pd.read_csv('C:\\Users\\glabka\\Dropbox\\Apps\\Plain.txt\\doucovani.txt') # type: dataFrame
 stats.columns = ['time', 'money', 'hours', 'subject', 'school', 'name'] # renaming columns
 
-# Filter = filterTimeCsv(cmpTimeG, stats, datetime(2017, 4, 27))
-Filter1 = filterTimeCsv(cmpTimeG, stats, datetime(2017, 4, 27))
-Filter2 = filterTimeCsv(cmpTimeL, stats, datetime(2017, 5, 12))
+Filter1 = filterTime(cmpTimeG, stats, datetime(2017, 4, 27))
+Filter2 = filterTime(cmpTimeL, stats, datetime(2017, 5, 12))
 Filter = Filter1 & Filter2
 print("stats")
 print(stats)
