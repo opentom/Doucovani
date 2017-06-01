@@ -1,0 +1,8 @@
+time,money,hours,předmět,škola,jméno # předměty: m - matika; f - fyzika; a - angličtina; i - informatika; s - statistika; škola. z - základní. s - střední. v - vysoká
+26 04 16 00,400,2,m,s,Smith
+28 04 16 00,200,1,m,s,Smith
+30 04 12 00,400,2,f,s,Black
+01 05 17 30,400,2,m,z,Omar
+03 05 12 00,200,1,s,v,Kendrick
+10 05 16 30,300,1.5,m,z,Omar
+12 05 14 00,400,2,m,s,Anderson
