@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import calendar
 from datetime import datetime
 
+# TODO: rewrite avDayIncomeInPeriod to have at least 3 basic options: only days when actual work was done; all days 'all';
+
+
 # Constants
 YEAR = 2017
 
@@ -40,7 +43,7 @@ def filterTime(cmpFun, dataFrame, timeForCmp):
     return pd.Series(data, index=list(range(dataLen)))
 
 # average day income in particular week
-def avDayIncomeInPeriod(dataFrame, datetime_from, datetime_to):
+def avDayIncomeInPeriod(dataFrame, datetime_from, datetime_to, option):
     Filter1 = filterTime(cmpTimeGE, stats,datetime_from)
     Filter2 = filterTime(cmpTimeLE, stats, datetime_to)
     Filter = Filter1 & Filter2
@@ -48,10 +51,16 @@ def avDayIncomeInPeriod(dataFrame, datetime_from, datetime_to):
 
     delta = datetime_to - datetime_from
     numofdays = delta.days + 1 # because both datetimes are included in calculation
+
+    # TODO: 3 options ('all', 'working days', 'actual work days') - use if
+
+    print("numofdays =", numofdays)
     money = my_stats['money'].sum()
-    day_average = money / numofdays
-    # print(day_average)
-    return day_average
+    print("money =", money)
+    av_day_income = money / numofdays
+    print("av_day_income =", av_day_income)
+    # print(av_day_income)
+    return av_day_income
 
 #### How to create filter from list
 # FilterP = pd.Series(data=[True, False, True, True], index=list(range(4)))
@@ -72,7 +81,8 @@ print("Filtered stats")
 print(stats[Filter])
 
 print('------------------------------------------')
-# avDayIncomeInPeriod(stats, datetime(2017, 4, 27), datetime(2017, 5, 11))
+av = avDayIncomeInPeriod(stats, datetime(2017, 4, 27), datetime(2017, 5, 11))
+print("average day income =",av,"kč")
 # date_from =
 # date_to =
 # for cycle with avDayIncomeInPeriod and then plotting
